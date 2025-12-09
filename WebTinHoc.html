@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trang web ví dụ — Trang chủ</title>
+    <meta
+      name="description"
+      content="Mẫu trang web đơn giản bằng HTML, CSS và JavaScript. Responsive, có navbar, hero, section tính năng và form liên hệ."
+    />
+
+    <style>
+      :root {
+        --bg: #f7f8fb;
+        --card: #ffffff;
+        --accent: #2563eb;
+        --muted: #6b7280;
+        --radius: 12px;
+        --max-width: 1100px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: #0f172a;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      /* Navbar */
+      header {
+        background: transparent;
+        position: sticky;
+        top: 0;
+        backdrop-filter: saturate(110%) blur(6px);
+        z-index: 40;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+      }
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .logo {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(135deg, var(--accent), #7c3aed);
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 700;
+      }
+      nav ul {
+        display: flex;
+        gap: 18px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .cta {
+        padding: 8px 14px;
+        border-radius: 10px;
+        background: var(--accent);
+        color: white;
+        font-weight: 600;
+      }
+
+      /* Mobile menu */
+      .menu-toggle {
+        display: none;
+      }
+      @media (max-width: 800px) {
+        nav ul {
+          display: none;
+        }
+        .menu-toggle {
+          display: block;
+          background: #fff;
+          padding: 8px;
+          border-radius: 8px;
+          box-shadow: 0 6px 18px rgba(10, 10, 10, 0.06);
+        }
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 28px;
+        align-items: center;
+        padding: 36px 0;
+      }
+      .hero h1 {
+        font-size: clamp(28px, 4.8vw, 44px);
+        margin: 0 0 12px;
+      }
+      .hero p {
+        color: var(--muted);
+        margin: 0 0 18px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #e6f0ff;
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+      }
+
+      /* Features */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .feature {
+        padding: 18px;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #fff, #fbfdff);
+        border: 1px solid rgba(15, 23, 42, 0.03);
+      }
+      .feature h3 {
+        margin: 6px 0 0;
+      }
+
+      @media (max-width: 1000px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .features {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Simple gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 18px;
+      }
+      .gallery img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      @media (max-width: 900px) {
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Contact */
+      form {
+        display: grid;
+        gap: 10px;
+      }
+      input,
+      textarea {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #e6e9ef;
+        font-size: 15px;
+      }
+      button[type="submit"] {
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 0;
+        background: var(--accent);
+        color: white;
+        font-weight: 600;
+      }
+
+      footer {
+        margin-top: 30px;
+        padding: 28px 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* Utilities */
+      .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .center {
+        display: grid;
+        place-items: center;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="logo">KD</div>
+          <div>
+            <div style="font-weight: 700">Tên trang</div>
+            <div style="font-size: 12px; color: var(--muted)">
+              Mô tả ngắn gọn
+            </div>
+          </div>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a href="#home">Trang chủ</a></li>
+            <li><a href="#features">Tính năng</a></li>
+            <li><a href="#gallery">Thư viện</a></li>
+            <li><a href="#contact">Liên hệ</a></li>
+          </ul>
+        </nav>
+
+        <div class="row">
+          <a class="cta" href="#contact">Bắt đầu</a>
+          <button class="menu-toggle" aria-expanded="false" id="menuBtn">
+            ☰
+          </button>
+        </div>
+      </div>
+
+      <!-- mobile menu (hidden by default) -->
+      <div
+        id="mobileMenu"
+        style="
+          display: none;
+          background: var(--card);
+          padding: 12px;
+          border-top: 1px solid rgba(15, 23, 42, 0.03);
+        "
+      >
+        <div class="container">
+          <a href="#home">Trang chủ</a><br />
+          <a href="#features">Tính năng</a><br />
+          <a href="#gallery">Thư viện</a><br />
+          <a href="#contact">Liên hệ</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="home" class="hero">
+        <div>
+          <span class="badge">Mẫu miễn phí</span>
+          <h1>Trang web đơn giản bằng HTML &amp; CSS</h1>
+          <p>
+            Đây là mẫu trang chủ giúp bạn bắt đầu nhanh. Thay nội dung, đổi màu,
+            hoặc kết hợp thêm JavaScript để làm cho trang động hơn.
+          </p>
+
+          <div class="card">
+            <strong>Những gì có trong mẫu này</strong>
+            <ul
+              style="margin: 8px 0 0; padding-left: 18px; color: var(--muted)"
+            >
+              <li>Navbar responsive</li>
+              <li>Hero + features</li>
+              <li>Gallery đơn giản</li>
+              <li>Form liên hệ (không gửi mail server)</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card center">
+            <h3 style="margin: 0 0 8px">Bắt đầu nhanh</h3>
+            <p style="color: var(--muted); font-size: 14px; margin: 0 0 12px">
+              Lưu file này là <code>index.html</code> và mở bằng trình duyệt.
+            </p>
+            <a class="cta" href="#contact">Liên hệ</a>
+          </div>
+        </aside>
+      </section>
+
+      <section id="features">
+        <h2 style="margin: 18px 0">Tính năng</h2>
+        <div class="features">
+          <div class="feature">
+            <div style="font-size: 22px">⚡</div>
+            <h3>Nhanh & Nhẹ</h3>
+            <p style="color: var(--muted); margin: 6px 0 0">
+              Trang chỉ dùng HTML/CSS/JS nhẹ, tải nhanh trên thiết bị di động.
+            </p>
+          </div>
+          <div class="feature">
+            <div style="font-size: 22px">📱</div>
+            <h3>Responsive</h3>
+            <p style="color: var(--muted); margin: 6px 0 0">
+              Bố cục điều chỉnh đẹp trên nhiều kích thước màn hình.
+            </p>
+          </div>
+          <div class="feature">
+            <div style="font-size: 22px">🔧</div>
+            <h3>Dễ chỉnh sửa</h3>
+            <p style="color: var(--muted); margin: 6px 0 0">
+              Mã rõ ràng, chú thích cơ bản để bạn thay đổi nhanh chóng.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <h2 style="margin: 18px 0">Thư viện</h2>
+        <div class="gallery">
+          <img src="https://picsum.photos/seed/1/600/400" alt="Ảnh 1" />
+          <img src="https://picsum.photos/seed/2/600/400" alt="Ảnh 2" />
+          <img src="https://picsum.photos/seed/3/600/400" alt="Ảnh 3" />
+          <img src="https://picsum.photos/seed/4/600/400" alt="Ảnh 4" />
+        </div>
+      </section>
+
+      <section id="contact" style="margin-top: 22px">
+        <h2>Liên hệ</h2>
+        <div class="card" style="margin-top: 10px">
+          <form id="contactForm">
+            <label class="sr-only" for="name">Tên</label>
+            <input id="name" name="name" placeholder="Tên của bạn" required />
+
+            <label class="sr-only" for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              placeholder="Email"
+              type="email"
+              required
+            />
+
+            <label class="sr-only" for="message">Tin nhắn</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Tin nhắn..."
+              required
+            ></textarea>
+
+            <div style="display: flex; gap: 10px; align-items: center">
+              <button type="submit">Gửi</button>
+              <div
+                id="formMsg"
+                style="color: var(--muted); font-size: 14px"
+              ></div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <div
+          class="container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+          "
+        >
+          <div>© <strong>Tên trang</strong> — Bản mẫu HTML</div>
+          <div style="color: var(--muted)">
+            Thiết kế đơn giản • Sửa theo nhu cầu
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      // Mobile menu toggle
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      menuBtn &&
+        menuBtn.addEventListener("click", () => {
+          const open = mobileMenu.style.display === "block";
+          mobileMenu.style.display = open ? "none" : "block";
+          menuBtn.setAttribute("aria-expanded", String(!open));
+        });
+
+      // Form handler (demo only) - prevents real submission
+      const form = document.getElementById("contactForm");
+      const formMsg = document.getElementById("formMsg");
+      form &&
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = form.name.value.trim();
+          formMsg.textContent = `Cảm ơn ${
+            name || "bạn"
+          } — tin nhắn đã được ghi (demo).`;
+          form.reset();
+          setTimeout(() => (formMsg.textContent = ""), 4000);
+        });
+
+      // Smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const href = a.getAttribute("href");
+          if (href.length > 1) {
+            const el = document.querySelector(href);
+            if (el) {
+              e.preventDefault();
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
